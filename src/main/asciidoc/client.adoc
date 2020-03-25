@@ -90,3 +90,23 @@ assertThat(link.getRel(), is("foo"));
 assertThat(link.getHref(), is("/foo/bar"));
 ----
 ====
+
+[[client.webclient]]
+== Configuring WebClient instances
+
+If you need configure a `WebClient` to speak hypermedia, there are several ways to do it. In any situation, you need to get a hold of the `WebClientConfigurer` created by Spring HATEOAS.
+
+.Configuring a `WebClient` yourself
+====
+[source, java]
+----
+include::{base-dir}/src/docs/java/org/springframework/hateoas/client/SampleWebClientBasedService.java[tag=code]
+----
+<1> As a Spring-based service, *constructor injection* will give you a copy of Spring HATEOAS's `WebClientConfigurer` bean.
+<2> Create a `WebClient` instance yourself.
+<3> Using `WebClientConfigurer`, register it's hypermedia-based converters in addition to the ones provided by the Spring Framework by default.
+====
+
+IMPORTANT: You have to capture the return value of the `build()` method, because `WebClient` itself is immutable.
+
+That's all it takes to get `WebClient` hypermedia support.

@@ -15,10 +15,7 @@
  */
 package org.springframework.hateoas.config;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.codec.Decoder;
 import org.springframework.core.codec.Encoder;
@@ -33,7 +30,9 @@ import org.springframework.util.MimeType;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Assembles {@link ExchangeStrategies} needed to wire a {@link WebClient} with hypermedia support.
@@ -54,7 +53,7 @@ public class WebClientConfigurer {
 	 * @param mapper must not be {@literal null}.
 	 * @param hypermediaTypes must not be {@literal null}.
 	 */
-	public WebClientConfigurer(ObjectMapper mapper, List<HypermediaMappingInformation> hypermediaTypes) {
+	WebClientConfigurer(ObjectMapper mapper, List<HypermediaMappingInformation> hypermediaTypes) {
 
 		Assert.notNull(mapper, "ObjectMapper must not be null!");
 		Assert.notNull(hypermediaTypes, "HypermediaMappingInformations must not be null!");
